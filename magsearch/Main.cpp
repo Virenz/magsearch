@@ -5,12 +5,14 @@
 #include <thread>
 
 #include "resource.h"
+#include "httpmags\magparse.h"
 
 wchar_t title[20] = L"磁力搜索器";											// 设置标题 
 
 INT_PTR CALLBACK DlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 void performActions(HWND hwnd);												// 获取单选框和编辑框进行对应的操作
+wchar_t* StringToWchar_t(const std::string str);
 template<class T>
 int InitTreeControl(T *uidatas);											// 进行tree布局显示数据
 
@@ -216,43 +218,20 @@ void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 template<class T> 
 int InitTreeControl(T *uidatas)
 {
-	auto infos = uidatas->getInfos();
+	auto infos = uidatas->getMags();
 	for (auto sp : infos)
 	{
-		TV_ITEM item;
+		TV_ITEM  item;
 		item.mask = TVIF_TEXT;
 		item.cchTextMax = 10;
-		item.pszText = StringToWchar_t(sp->getVirusName());
+		item.pszText = StringToWchar_t(sp);
 
-		TV_INSERTSTRUCT insert;
+		TV_INSERTSTRUCT  insert;
 		insert.hParent = TVI_ROOT;
 		insert.hInsertAfter = TVI_LAST;
 		insert.item = item;
 
 		Selected = TreeView_InsertItem(m_tree, &insert);
-		for (std::multimap<std::string, std::string>::iterator iter = sp->getJsonsInfo().begin(); iter != sp->getJsonsInfo().end(); ++iter) //遍历json成员
-		{
-			std::string str;
-			str.append(iter->first);
-			str.append(" : ");
-			str.append(iter->second);
-			wchar_t * wszUtf8 = StringToWchar_t(str);
-
-			TV_ITEM item1;
-			item1.mask = TVIF_TEXT | TVIF_PARAM | TVS_HASLINES | TVS_LINESATROOT;
-			item1.cchTextMax = 2;
-			item1.pszText = wszUtf8;
-
-			TV_INSERTSTRUCT insert1;
-			insert1.hParent = Selected;
-			insert1.hInsertAfter = TVI_LAST;
-			insert1.item = item1;
-
-			HTREEITEM root2 = TreeView_InsertItem(m_tree, &insert1);
-
-			delete[] wszUtf8;
-		}
-
 	}
 
 	return 0;
@@ -260,5 +239,36 @@ int InitTreeControl(T *uidatas)
 
 void performActions(HWND hwnd)
 {
+	char search_str[MAX_PATH];
+	GetDlgItemTextA(hwnd, IDC_SEARCH, search_str, MAX_PATH);
 
+	MagParse* magParse = new MagParse();
+	magParse->parseHTMLLink(search_str);
+	magParse->parseMag();
+
+	// 初始化tree
+	m_tree = GetDlgItem(hwnd, IDC_SHOW);
+	TreeView_DeleteAllItems(m_tree);
+	InitTreeControl(magParse);
+
+	delete magParse;
+
+	// 唤醒执行 按钮
+	EnableWindow(GetDlgItem(hwnd, IDOK), true);
+}
+
+// 需包含locale、string头文件、使用setlocale函数。
+wchar_t* StringToWchar_t(const std::string str)
+{
+	// string转wstring
+	size_t converted = 0;
+	unsigned len = str.size() * 2;// 预留字节数
+	if (len == 0)
+	{
+		return NULL;
+	}
+	setlocale(LC_CTYPE, "");     //必须调用此函数
+	wchar_t *p = new wchar_t[len];// 申请一段内存存放转换后的字符串
+	mbstowcs_s(&converted, p, len, str.c_str(), _TRUNCATE);// 转换
+	return p;
 }

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\httpmag">
+      <UniqueIdentifier>{d516b7e5-d22a-4eb1-97a6-cc763a2abae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\httpmag">
+      <UniqueIdentifier>{fa53595d-b55b-4f4a-9481-f50569f4e5ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="magsearch.rc">
@@ -23,10 +29,22 @@
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="httpmags\httptool.cpp">
+      <Filter>源文件\httpmag</Filter>
+    </ClCompile>
+    <ClCompile Include="httpmags\magparse.cpp">
+      <Filter>源文件\httpmag</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="httpmags\httptool.h">
+      <Filter>头文件\httpmag</Filter>
+    </ClInclude>
+    <ClInclude Include="httpmags\magparse.h">
+      <Filter>头文件\httpmag</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
