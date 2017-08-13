@@ -13,7 +13,7 @@ MagParse::~MagParse()
 	
 }
 
-std::vector<std::string>& MagParse::getMags()
+std::vector<std::wstring>& MagParse::getMags()
 {
 	// TODO: 在此处插入 return 语句
 	return this->mags;
@@ -39,7 +39,7 @@ void MagParse::parseHTMLLink(char * url)
 	std::string html_content(httpTool->getReponseHTML());
 	delete httpTool;
 	
-	// 正则表达获取网址
+	// 正则表达获取磁力链接详细网址
 	int index = 0;
 	const std::regex pattern("http://www.ciliba.org/detail/[0-9a-z]{40}.html");
 	for (std::sregex_iterator it(html_content.begin(), html_content.end(), pattern), end;     //end是尾后迭代器，regex_iterator是regex_iterator的string类型的版本
@@ -59,24 +59,26 @@ void MagParse::parseMag()
 		bool isGet = httpTool->httpGet(url.c_str());
 		if (!isGet)
 			return;
-		std::string magHtml(httpTool->getReponseHTML());
+		//std::string magHtml(httpTool->getReponseHTML());
+		std::wstring magunicodeHtml;
+		StringToWstring(magunicodeHtml, std::string(httpTool->getReponseHTML()));
 		delete httpTool;
 
-		// 正则表达获取网址
-
-		const std::regex pattern("([\u4e00-\u9fa5]+)");
-		//const std::regex pattern("</div><ol><li>([\\u4e00-\\u9fa5]+)<span class=\"cpill blue-pill\">([\\.\\d]{3,} \\w{2})</span>");
+		// 正则表达获取文件名-大小-磁力链接
+		const std::wregex pattern(L"<h1 class=\"res-title\">(.*)</h1><div class=\"fileDetail\">.*种子大小：([\\.\\d]{3,} \\w{2}).*href=\"(magnet.*\\w{40})");
+		//const std::wregex pattern(L"文件列表：</p></div><ol><li>(.*)<span class=\"cpill blue-pill\">([\\.\\d]{3,} \\w{2})</span>");
 		//const std::regex pattern("href=\"(magnet.*\\w{40})");
-		std::smatch result;
-		bool valid = std::regex_search(magHtml, result, pattern);
+		std::wsmatch result;
+		
+		bool valid = std::regex_search(magunicodeHtml, result, pattern);
 		//此处result参数可有可无，result是一个字符串数组，用来存储正则表达式里面括号的内容。
-		std::string strbuf;
+		std::wstring strbuf;
 		if(valid&&(result.length()>0))
 		{
 			for(int i = 1;i<result.size();i++)
 			{
 				strbuf.append(result[i]);
-				strbuf.append("\t");
+				strbuf.append(L" \t\t");
 				//mags.push_back(result[i]);
 			}
 		}
@@ -245,4 +247,15 @@ BOOL MagParse::UrlDecode(const char* szSrc, char* pBuf, int cbBufLen)
 	free(pUTF8);
 	free(pUnicode);
 	return TRUE;
+}
+
+void MagParse::StringToWstring(std::wstring& szDst, std::string& str)
+{
+	std::string temp = str;
+	int len = MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)temp.c_str(), -1, NULL, 0);
+	wchar_t * wszUtf8 = new wchar_t[len + 1];
+	memset(wszUtf8, 0, len * 2 + 2);
+	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)temp.c_str(), -1, (LPWSTR)wszUtf8, len);
+	szDst = wszUtf8;
+	delete[] wszUtf8;
 }

@@ -224,7 +224,7 @@ int InitTreeControl(T *uidatas)
 		TV_ITEM  item;
 		item.mask = TVIF_TEXT;
 		item.cchTextMax = 10;
-		item.pszText = StringToWchar_t(sp);
+		item.pszText = (wchar_t*)(sp.c_str());
 
 		TV_INSERTSTRUCT  insert;
 		insert.hParent = TVI_ROOT;

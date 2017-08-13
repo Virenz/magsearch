@@ -1,11 +1,11 @@
 http://www.ciliba.org/s/%E6%88%98%E7%8B%BC.html
 http://www.ciliba.org/detail/0240d1a2b9929ca3c885c6714582fc6410de9a25.html
 
+</div><ol><li>(.*)<span class="cpill blue-pill">([\.\d]{3,} \w{2})</span>
 文件列表：</p></div><ol><li>(.*)<span class="cpill blue-pill">([\.\d]{3,} \w{2})</span>
 magnet:?xt=urn:btih:6F9E06179536C41C6192430974CB99B9D8FA0E0F
 magnet:?xt=urn:btih:\w{40}
 http://www.ciliba.org/detail/[0-9a-z]{40}.html
-
 
 
 <!doctype html><html><head><meta charset="UTF-8"><meta http-equiv="Content-type" content="text/html;charset=utf-8"><!--IE--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--mobile--><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>战狼 torrent,magnet,bt下载,迅雷下载-磁力吧</title><meta name="keywords" content="战狼magnet,bt下载,磁力链,迅雷下载,磁力吧"><meta name="description" content="磁力吧提供战狼相关的磁力链大约70条,用时0.0182秒。"><meta http-equiv="Cache-Control" content="no-siteapp"><meta http-equiv="Cache-Control" content="no-transform " /><link rel="stylesheet" href="/Public/static/css/style_v2.css" type="text/css"/><script src="//cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script><link rel="shortcut icon" type="image/x-icon" href="/Public/static/img/favicon.ico" /></head><body><!--wrap--><div id="wrapper"><div class="top-bar"><span class="first"><a href="http://www.ciliba.org" >首页</a></span><span class="top_fav"><a href="/Tool/fav" target="_blank">收藏磁力吧</a></span></div><div class="header-div"><form class="search-form" action="/" method="post"><a href="/" title="磁力搜索" class="fl"><img src="/Public/static/img/logomini.gif" alt="磁力搜索" class="nav-logo"></a><input type="text" id="search" title="Search" value="战狼" autocomplete="off" name="s" placeholder="请输入关键词" class="fl mt25"><input type="submit" id="btnSearch" value="搜 索" class="blue fl mt25"></form></div><div id="sort-bar"><a href="http://www.ciliba.org/s/%E6%88%98%E7%8B%BC_time_1.html" rel="nofollow">时间</a><a href="http://www.ciliba.org/s/%E6%88%98%E7%8B%BC_hits_1.html" rel="nofollow">热度</a><a href="http://www.ciliba.org/s/%E6%88%98%E7%8B%BC_size_1.html" rel="nofollow">大小</a></div><div id="content"><div id="wall"><div class="search-statu"><span>大约70条结果，耗时 0.0182  秒。</span><span></span></div><div class="row"><div class="search-list col-md-8"><div class="search-item"><div class="item-title"><h3><a href="http://www.ciliba.org/detail/6f9e06179536c41c6192430974cb99b9d8fa0e0f.html" target="_blank"><em>战狼</em>2</a></h3></div><div class="item-list"><em>战狼</em>2.avi</div><div class="item-bar"><span class="cpill 
